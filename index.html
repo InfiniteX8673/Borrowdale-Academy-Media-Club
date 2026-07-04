@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Borrowdale Academy Media Club</title>
+    <meta
+      name="description"
+      content="The Borrowdale Academy Media Club showcases creativity through photography, video, design, and storytelling."
+    />
+    <link rel="icon" type="image/png" href="Media Club Logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a class="brand" href="#home">
+          <img src="Media Club Logo.png" alt="Borrowdale Academy Media Club logo" />
+          <span>
+            <strong>Borrowdale Academy</strong>
+            <small>Media Club</small>
+          </span>
+        </a>
+        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <nav class="site-nav" aria-label="Primary">
+          <a href="#about">About</a>
+          <a href="#gallery">Gallery</a>
+          <a href="#magazines">Magazines</a>
+          <a href="#events">Events</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="home">
+      <section class="hero">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">Creativity in every frame</p>
+            <h1>Storytelling through media, photography, and collaboration.</h1>
+            <p>
+              The Borrowdale Academy Media Club brings students together to create,
+              capture, and share powerful visual stories that reflect school life and
+              ambition.
+            </p>
+            <div class="hero-actions">
+              <a class="button primary" href="#gallery">View Gallery</a>
+              <a class="button secondary" href="#contact">Join the Club</a>
+            </div>
+          </div>
+          <div class="hero-card">
+            <h2>What we do</h2>
+            <ul>
+              <li>Photography and videography</li>
+              <li>Editing and design</li>
+              <li>School events and highlights</li>
+              <li>Creative team projects</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="about" class="section">
+        <div class="container split">
+          <div>
+            <p class="eyebrow">About the club</p>
+            <h2>Making moments visible and meaningful.</h2>
+            <p>
+              We are a student-led space where creativity, confidence, and technical
+              skill grow together. Whether you love cameras, editing software, or
+              getting involved in school events, the Media Club offers a welcoming
+              place to explore your ideas.
+            </p>
+          </div>
+          <div class="info-box">
+            <h3>Club highlights</h3>
+            <p>Weekly creative sessions</p>
+            <p>Event coverage and content creation</p>
+            <p>Student-led projects and exhibitions</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="gallery" class="section alt">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">Latest work</p>
+            <h2>Moments captured by the club</h2>
+          </div>
+          <div id="gallery-grid" class="gallery-grid"></div>
+        </div>
+      </section>
+
+      <section id="magazines" class="section">
+        <div class="container magazines-panel">
+          <div>
+            <p class="eyebrow">Magazines</p>
+            <h2>Our club magazine is on the way.</h2>
+            <p>
+              We are building a creative publication filled with student stories,
+              photography features, interviews, and design highlights from the Media Club.
+            </p>
+          </div>
+          <div class="magazines-card">
+            <p class="eyebrow">Coming soon</p>
+            <h3>Borrowdale Academy Media Club Magazine</h3>
+            <p>
+              Expect inspiring articles, featured photos, and fresh ideas from the club’s
+              next creative release.
+            </p>
+            <div class="pill-row">
+              <span class="pill">Student stories</span>
+              <span class="pill">Photo features</span>
+              <span class="pill">Design highlights</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="events" class="section">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">Upcoming focus</p>
+            <h2>What’s coming up</h2>
+          </div>
+          <div class="card-grid">
+            <article class="card">
+              <h3>Creative Workshops</h3>
+              <p>Hands-on sessions on photography basics, framing, and storytelling.</p>
+            </article>
+            <article class="card">
+              <h3>Event Coverage</h3>
+              <p>Supporting school celebrations, sports days, and student showcases.</p>
+            </article>
+            <article class="card">
+              <h3>Digital Showcase</h3>
+              <p>A growing collection of films, edits, and visual stories from club members.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="section alt">
+        <div class="container contact-grid">
+          <div>
+            <p class="eyebrow">Get involved</p>
+            <h2>Join the next creative project.</h2>
+            <p>
+              Want to contribute ideas, capture school events, or learn more about media?
+              Send a message and the club team will be in touch.
+            </p>
+            <div class="social-links">
+              <a href="https://www.youtube.com/channel/UCE8TmQjyA2OaeCJgGuAEDUQ" target="_blank" rel="noopener noreferrer">YouTube</a>
+              <a href="https://www.tiktok.com/@borrowdaleacademy?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener noreferrer">TikTok</a>
+            </div>
+          </div>
+          <form id="contact-form" class="contact-form">
+            <label>
+              Name
+              <input type="text" name="name" required />
+            </label>
+            <label>
+              Email
+              <input type="email" name="email" required />
+            </label>
+            <label>
+              Message
+              <textarea name="message" rows="4" required></textarea>
+            </label>
+            <button class="button primary" type="submit">Send message</button>
+            <p id="form-status" class="form-status" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <div id="lightbox" class="lightbox" aria-hidden="true">
+      <button class="lightbox-close" aria-label="Close preview">×</button>
+      <img id="lightbox-image" src="" alt="Featured club photo" />
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
