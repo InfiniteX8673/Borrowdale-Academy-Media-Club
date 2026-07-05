@@ -38,6 +38,7 @@
           <a href="#magazines">Magazines</a>
           <a href="#events">Events</a>
           <a href="#contact">Contact</a>
+          <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">🌙 Dark mode</button>
         </nav>
       </div>
     </header>
@@ -190,5 +191,24 @@
     </div>
 
     <script src="script.js"></script>
+    <script>
+      const themeToggle = document.getElementById('themeToggle');
+      const root = document.documentElement;
+      const storedTheme = localStorage.getItem('media-club-theme');
+
+      const applyTheme = (theme) => {
+        const isDark = theme === 'dark';
+        root.setAttribute('data-theme', isDark ? 'dark' : 'light');
+        themeToggle.textContent = isDark ? '☀️ Light mode' : '🌙 Dark mode';
+      };
+
+      applyTheme(storedTheme || 'light');
+
+      themeToggle.addEventListener('click', () => {
+        const nextTheme = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('media-club-theme', nextTheme);
+        applyTheme(nextTheme);
+      });
+    </script>
   </body>
 </html>

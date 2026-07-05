@@ -7,12 +7,12 @@ const form = document.getElementById('contact-form');
 const status = document.getElementById('form-status');
 
 const images = [
-  { src: '2025 Pictures/IMG-20251023-WA0081.jpg', title: 'School event highlight' },
-  { src: '2025 Pictures/IMG-20251023-WA0074.jpg', title: 'Creative capture' },
-  { src: '2025 Pictures/IMG-20251023-WA0100.jpg', title: 'Studio-style moment' },
-  { src: '2025 Pictures/IMG-20251023-WA0076.jpg', title: 'Team collaboration' },
-  { src: '2025 Pictures/IMG-20251023-WA0049.jpg', title: 'Visual storytelling' },
-  { src: '2025 Pictures/IMG-20251023-WA0064.jpg', title: 'Club energy' }
+  { src: 'Gallaries/2025/IMG-20251023-WA0081.jpg', title: 'School event highlight' },
+  { src: 'Gallaries/2025/IMG-20251023-WA0074.jpg', title: 'Creative capture' },
+  { src: 'Gallaries/2025/IMG-20251023-WA0100.jpg', title: 'Studio-style moment' },
+  { src: 'Gallaries/2025/IMG-20251023-WA0076.jpg', title: 'Team collaboration' },
+  { src: 'Gallaries/2025/IMG-20251023-WA0049.jpg', title: 'Visual storytelling' },
+  { src: 'Gallaries/2025/IMG-20251023-WA0064.jpg', title: 'Club energy' }
 ];
 
 function renderGallery() {
