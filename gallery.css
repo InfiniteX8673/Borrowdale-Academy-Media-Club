@@ -135,6 +135,9 @@
   border-color: var(--accent);
   box-shadow: 0 0 0 3px rgba(255, 207, 16, 0.2);
 }
+:root[data-theme='dark'] #gallery-search {
+  background: #0d1f2b;
+}
 
 .icon-btn {
   width: 42px;
@@ -155,6 +158,15 @@
   border-color: var(--accent-2);
   transform: translateY(-1px);
   box-shadow: 0 6px 18px rgba(8, 31, 43, 0.1);
+}
+:root[data-theme='dark'] .icon-btn {
+  border-color: rgba(255, 255, 255, 0.15);
+  color: var(--muted);
+}
+:root[data-theme='dark'] .icon-btn:hover {
+  border-color: var(--accent-2);
+  color: var(--accent-2);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
 }
 .icon-btn svg { width: 18px; height: 18px; }
 
@@ -185,6 +197,10 @@
   animation: fadeUp 500ms ease both;
   role: listitem;
 }
+:root[data-theme='dark'] .gallery-item {
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
 
 /* Masonry item spacing */
 .full-gallery-grid.masonry .gallery-item {
@@ -195,6 +211,9 @@
 .gallery-item:hover {
   transform: translateY(-4px) scale(1.01);
   box-shadow: 0 18px 42px rgba(8, 31, 43, 0.18);
+}
+:root[data-theme='dark'] .gallery-item:hover {
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.45);
 }
 
 .gallery-item img {
