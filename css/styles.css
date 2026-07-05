@@ -53,6 +53,20 @@ body {
 }
 a { color: inherit; text-decoration: none; }
 img { max-width: 100%; display: block; }
+img[loading="lazy"] {
+  background: linear-gradient(135deg, var(--surface), transparent);
+  background-size: 200% 200%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+@keyframes shimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
 .theme-toggle {
   border: none;
   border-radius: 999px;
@@ -150,6 +164,16 @@ img { max-width: 100%; display: block; }
   height: 2px;
   background: var(--text);
   border-radius: 999px;
+  transition: transform 220ms ease, opacity 220ms ease;
+}
+.nav-toggle[aria-expanded="true"] span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+.nav-toggle[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+}
+.nav-toggle[aria-expanded="true"] span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
 }
 .hero {
   padding: 5.5rem 0 4.25rem;
@@ -238,6 +262,12 @@ h1 {
   transition: transform 220ms ease, box-shadow 220ms ease;
   animation: fadeUp 750ms ease both;
 }
+.gallery-card:nth-child(1) { animation-delay: 0.05s; }
+.gallery-card:nth-child(2) { animation-delay: 0.1s; }
+.gallery-card:nth-child(3) { animation-delay: 0.15s; }
+.gallery-card:nth-child(4) { animation-delay: 0.2s; }
+.gallery-card:nth-child(5) { animation-delay: 0.25s; }
+.gallery-card:nth-child(6) { animation-delay: 0.3s; }
 .gallery-card:hover {
   transform: translateY(-3px);
   box-shadow: 0 20px 44px rgba(8, 31, 43, 0.16);
@@ -386,11 +416,23 @@ input:focus, textarea:focus { outline: 2px solid rgba(255,207,16,0.3); border-co
   position: absolute;
   top: 1rem;
   right: 1rem;
-  font-size: 2rem;
-  border: none;
-  background: transparent;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.2);
   color: white;
+  font-size: 1.5rem;
   cursor: pointer;
+  transition: background 180ms ease, transform 180ms ease;
+  backdrop-filter: blur(6px);
+}
+.lightbox-close:hover {
+  background: rgba(255,255,255,0.28);
+  transform: rotate(90deg);
 }
 @media (max-width: 850px) {
   .hero-grid, .split, .contact-grid, .card-grid, .gallery-grid, .magazines-panel {

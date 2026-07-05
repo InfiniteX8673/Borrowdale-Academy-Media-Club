@@ -95,14 +95,23 @@ document.addEventListener('DOMContentLoaded', () => {
     event.preventDefault();
     if (!status) return;
 
+    const btn = form.querySelector('button[type="submit"]');
+    const originalText = btn.innerHTML;
+    btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Sending...';
+    btn.disabled = true;
+
     status.textContent = 'Sending message...';
     status.className = 'form-status processing';
 
-    // Simulate form submission process
     setTimeout(() => {
+      btn.innerHTML = '<i class="fa-regular fa-circle-check"></i> Sent!';
       status.textContent = 'Thank you! Your message has been sent successfully.';
       status.className = 'form-status success';
       form.reset();
+      setTimeout(() => {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+      }, 2000);
     }, 1200);
   });
 });

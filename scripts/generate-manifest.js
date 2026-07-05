@@ -1,8 +1,9 @@
 const fs = require('fs');
 const path = require('path');
 
-const GALLERIES_DIR = path.join(__dirname, 'Gallaries');
-const OUTPUT = path.join(__dirname, 'gallery-manifest.js');
+const ROOT = path.join(__dirname, '..');
+const GALLERIES_DIR = path.join(ROOT, 'Gallaries');
+const OUTPUT = path.join(ROOT, 'data', 'gallery-manifest.js');
 const SUPPORTED = /\.(jpg|jpeg|png|gif|webp|avif)$/i;
 
 function scan() {

@@ -1,8 +1,9 @@
 const fs = require('fs');
 const path = require('path');
 
-const MAGAZINES_DIR = path.join(__dirname, 'Magazines');
-const OUTPUT = path.join(__dirname, 'magazine-manifest.js');
+const ROOT = path.join(__dirname, '..');
+const MAGAZINES_DIR = path.join(ROOT, 'Magazines');
+const OUTPUT = path.join(ROOT, 'data', 'magazine-manifest.js');
 
 function scan() {
   const manifest = [];

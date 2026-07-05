@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Creative Workshops",
+    "date": "Ongoing",
+    "time": "Weekly sessions",
+    "description": "Hands-on sessions on photography basics, framing, and storytelling.",
+    "type": "workshop",
+    "link": null
+  },
+  {
+    "title": "Event Coverage",
+    "date": "Various dates",
+    "time": "School events",
+    "description": "Supporting school celebrations, sports days, and student showcases.",
+    "type": "coverage",
+    "link": null
+  },
+  {
+    "title": "Digital Showcase",
+    "date": "Coming soon",
+    "time": "TBD",
+    "description": "A growing collection of films, edits, and visual stories from club members.",
+    "type": "showcase",
+    "link": null
+  }
+]

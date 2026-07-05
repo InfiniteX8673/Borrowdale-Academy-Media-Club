@@ -195,7 +195,6 @@
   border: 1px solid rgba(255, 255, 255, 0.4);
   transition: transform 220ms ease, box-shadow 220ms ease;
   animation: fadeUp 500ms ease both;
-  role: listitem;
 }
 :root[data-theme='dark'] .gallery-item {
   border-color: rgba(255, 255, 255, 0.08);

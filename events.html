@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Magazines — Borrowdale Academy Media Club</title>
+    <title>Events — Borrowdale Academy Media Club</title>
     <meta
       name="description"
-      content="Browse all issues of the Borrowdale Academy Media Club Magazine."
+      content="Upcoming events and activities from the Borrowdale Academy Media Club."
     />
     <link rel="icon" type="image/png" href="images/Media Club Logo.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -16,7 +16,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/styles.css" />
-    <link rel="stylesheet" href="css/magazines.css" />
+    <link rel="stylesheet" href="css/events.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   </head>
   <body>
@@ -37,6 +37,7 @@
         <nav class="site-nav" aria-label="Primary">
           <a href="index.html">Home</a>
           <a href="index.html#about">About</a>
+          <a href="gallery.html">Gallery</a>
           <a href="magazines.html">Magazines</a>
           <a href="events.html">Events</a>
           <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">🌙 Dark mode</button>
@@ -44,46 +45,33 @@
       </div>
     </header>
 
-    <section class="magazines-page-hero">
+    <section class="events-page-hero">
       <div class="container">
         <a href="index.html" class="back-link">← Back to home</a>
-        <p class="eyebrow">Magazines</p>
-        <h1>Our Magazine Collection</h1>
-        <p class="magazines-hero-sub">
-          Every issue captures the creativity, stories, and highlights from the Media Club.
+        <p class="eyebrow">Events</p>
+        <h1>Upcoming Events</h1>
+        <p class="events-hero-sub">
+          Stay up to date with workshops, showcases, and club activities.
         </p>
         <div class="gallery-stats">
-          <span id="magazine-count">0 issues</span>
+          <span id="events-count">0 events</span>
+          <span class="stats-dot">·</span>
+          <span id="events-status"></span>
         </div>
       </div>
     </section>
 
-    <main class="container magazines-page-main">
-      <div id="magazines-grid" class="magazines-grid"></div>
+    <main class="container events-page-main">
+      <div id="events-list" class="events-list"></div>
     </main>
 
-    <footer class="magazines-footer">
+    <footer class="events-footer">
       <div class="container">
         <p>© 2025 Borrowdale Academy Media Club · <a href="index.html">Return to home</a></p>
       </div>
     </footer>
 
-    <!-- ── MAGAZINE READER OVERLAY ───────────────────────── -->
-    <div id="magazine-reader" class="magazine-reader" aria-hidden="true" role="dialog" aria-label="Magazine reader">
-      <div class="reader-backdrop" id="reader-backdrop"></div>
-      <div class="reader-header">
-        <h2 id="reader-title"></h2>
-        <button class="reader-close" id="reader-close" aria-label="Close magazine">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-        </button>
-      </div>
-      <div class="reader-body">
-        <iframe id="reader-frame" title="Magazine viewer"></iframe>
-      </div>
-    </div>
-
-    <script src="data/magazine-manifest.js"></script>
-    <script src="js/magazines.js"></script>
+    <script src="js/events.js"></script>
     <script>
       const themeToggle = document.getElementById('themeToggle');
       const root = document.documentElement;

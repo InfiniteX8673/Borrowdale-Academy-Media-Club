@@ -8,21 +8,21 @@
       name="description"
       content="The Borrowdale Academy Media Club showcases creativity through photography, video, design, and storytelling."
     />
-    <link rel="icon" type="image/png" href="Media Club Logo.png" />
+    <link rel="icon" type="image/png" href="images/Media Club Logo.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   </head>
   <body>
     <header class="site-header">
       <div class="container nav-wrap">
         <a class="brand" href="#home">
-          <img src="Media Club Logo.png" alt="Borrowdale Academy Media Club logo" />
+          <img src="images/Media Club Logo.png" alt="Borrowdale Academy Media Club logo" />
           <span>
             <strong>Borrowdale Academy</strong>
             <small>Media Club</small>
@@ -35,9 +35,9 @@
         </button>
         <nav class="site-nav" aria-label="Primary">
           <a href="#about">About</a>
-          <a href="#gallery">Gallery</a>
-          <a href="#magazines">Magazines</a>
-          <a href="#events">Events</a>
+          <a href="gallery.html">Gallery</a>
+          <a href="magazines.html">Magazines</a>
+          <a href="events.html">Events</a>
           <a href="#contact">Contact</a>
           <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">🌙 Dark mode</button>
         </nav>
@@ -153,6 +153,9 @@
               <p>A growing collection of films, edits, and visual stories from club members.</p>
             </article>
           </div>
+          <div class="see-more-wrap">
+            <a href="events.html" class="button secondary see-more-btn">See All Events →</a>
+          </div>
         </div>
       </section>
 
@@ -191,12 +194,14 @@
     </main>
 
     <div id="lightbox" class="lightbox" aria-hidden="true">
-      <button class="lightbox-close" aria-label="Close preview">×</button>
+      <button class="lightbox-close" aria-label="Close preview">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="width:20px;height:20px"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
       <img id="lightbox-image" src="" alt="Featured club photo" />
     </div>
 
-    <script src="gallery-manifest.js"></script>
-    <script src="script.js"></script>
+    <script src="data/gallery-manifest.js"></script>
+    <script src="js/script.js"></script>
     <script>
       const themeToggle = document.getElementById('themeToggle');
       const root = document.documentElement;

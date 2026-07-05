@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Temporary Media Club Magazine</title>
     <meta name="description" content="A temporary magazine mockup for testing the UI." />
-    <link rel="icon" type="image/png" href="../Media Club Logo.png" />
+    <link rel="icon" type="image/png" href="../../images/Media Club Logo.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   </head>
   <body>
     <div class="topbar">
@@ -23,7 +24,7 @@
           <p class="subheading">A test layout for showcasing photos, stories, and club highlights.</p>
         </div>
         <div class="header-actions">
-          <a class="back-link" href="../index.html">← Back to main site</a>
+          <a class="back-link" href="../../index.html"><i class="fa-solid fa-arrow-left"></i> Back to main site</a>
         </div>
       </header>
 
@@ -52,7 +53,7 @@
         </section>
 
         <section class="story-card">
-          <h3>What’s Inside</h3>
+          <h3>What's Inside</h3>
           <ul>
             <li>Student photography highlights</li>
             <li>Behind-the-scenes club moments</li>
@@ -65,7 +66,7 @@
     <script>
       const themeToggle = document.getElementById('themeToggle');
       const root = document.documentElement;
-      const storedTheme = localStorage.getItem('magazine-theme');
+      const storedTheme = localStorage.getItem('media-club-theme');
 
       const applyTheme = (theme) => {
         const isDark = theme === 'dark';
@@ -77,7 +78,7 @@
 
       themeToggle.addEventListener('click', () => {
         const nextTheme = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-        localStorage.setItem('magazine-theme', nextTheme);
+        localStorage.setItem('media-club-theme', nextTheme);
         applyTheme(nextTheme);
       });
     </script>

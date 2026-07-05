@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — Events Manager | Media Club</title>
+  <link rel="icon" type="image/png" href="../images/Media%20Club%20Logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    :root {
+      --bg: #0d1b2a;
+      --surface: #1b2d45;
+      --surface-2: #243b57;
+      --text: #e8edf2;
+      --muted: #8ba0b8;
+      --accent: #ffcf10;
+      --accent-2: #6dd3ff;
+      --accent-3: #ff8d9e;
+      --border: rgba(255,255,255,0.08);
+      --green: #34d399;
+      --red: #f87171;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .admin-header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .admin-header h1 {
+      margin: 0;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .admin-header h1 i { color: var(--accent); }
+    .admin-header .badge {
+      font-size: 0.75rem;
+      background: var(--accent);
+      color: #11222a;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      font-weight: 800;
+    }
+    .admin-header a {
+      color: var(--muted);
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      padding: 0.4rem 0.8rem;
+      border-radius: 999px;
+      transition: background 180ms ease, color 180ms ease;
+    }
+    .admin-header a:hover {
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+    }
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 1.5rem;
+    }
+    .status-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.7rem 1rem;
+      border-radius: 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+    .status-bar.success { border-color: var(--green); color: var(--green); }
+    .status-bar.error { border-color: var(--red); color: var(--red); }
+    .status-bar i { font-size: 1rem; }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    @media (max-width: 760px) {
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+    .panel {
+      background: var(--surface);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .panel-title {
+      padding: 0.8rem 1rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+      margin: 0;
+    }
+    .panel-body { padding: 1rem; }
+    .event-form { display: flex; flex-direction: column; gap: 0.75rem; }
+    .event-form label {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--muted);
+    }
+    .event-form input,
+    .event-form textarea,
+    .event-form select {
+      padding: 0.55rem 0.75rem;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--surface-2);
+      color: var(--text);
+      font: inherit;
+      font-size: 0.9rem;
+    }
+    .event-form input:focus,
+    .event-form textarea:focus,
+    .event-form select:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(255,207,16,0.15);
+    }
+    .event-form textarea { resize: vertical; min-height: 60px; }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      padding: 0.55rem 1rem;
+      border-radius: 999px;
+      border: none;
+      font: inherit;
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: transform 140ms ease, opacity 140ms ease;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn:active { transform: scale(0.97); }
+    .btn-primary {
+      background: var(--accent);
+      color: #11222a;
+    }
+    .btn-danger {
+      background: var(--red);
+      color: #fff;
+    }
+    .btn-secondary {
+      background: var(--surface-2);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-sm { padding: 0.35rem 0.75rem; font-size: 0.8rem; }
+    .btn-group {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-top: 0.5rem;
+    }
+    .event-list { display: flex; flex-direction: column; gap: 0.6rem; }
+    .event-item {
+      background: var(--surface-2);
+      border-radius: 12px;
+      padding: 0.8rem 1rem;
+      border: 1px solid var(--border);
+    }
+    .event-item-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+    .event-item-header h4 {
+      margin: 0;
+      font-size: 0.95rem;
+    }
+    .event-item-header .type-tag {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 0.15rem 0.5rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      color: var(--muted);
+    }
+    .event-item p {
+      margin: 0.3rem 0 0;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .event-item-actions {
+      display: flex;
+      gap: 0.4rem;
+      flex-shrink: 0;
+    }
+    .json-output {
+      width: 100%;
+      min-height: 200px;
+      background: #0a111a;
+      color: #a8d8ea;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem;
+      font: 400 0.8rem/1.5 'SF Mono', 'Fira Code', monospace;
+      resize: vertical;
+    }
+    .json-output:focus { outline: none; border-color: var(--accent); }
+    .copy-msg {
+      font-size: 0.8rem;
+      color: var(--green);
+      font-weight: 600;
+      margin-top: 0.4rem;
+    }
+    .github-section {
+      margin-top: 1rem;
+      padding: 1rem;
+      background: var(--surface);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+    }
+    .github-section h3 {
+      margin: 0 0 0.75rem;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .github-section input {
+      width: 100%;
+      padding: 0.55rem 0.75rem;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--surface-2);
+      color: var(--text);
+      font: inherit;
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+    }
+    .github-section input:focus { outline: none; border-color: var(--accent); }
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+  <header class="admin-header">
+    <h1><i class="fa-solid fa-screwdriver-wrench"></i> Events Manager <span class="badge">Admin</span></h1>
+    <div>
+      <a href="../events.html"><i class="fa-regular fa-eye"></i> View Events Page</a>
+      <a href="../index.html"><i class="fa-solid fa-house"></i> Main Site</a>
+    </div>
+  </header>
+
+  <div class="container">
+    <div id="status-bar" class="status-bar hidden"></div>
+
+    <div class="grid-2">
+      <!-- LEFT: Form -->
+      <div class="panel">
+        <p class="panel-title"><i class="fa-regular fa-pen-to-square"></i> Add / Edit Event</p>
+        <div class="panel-body">
+          <form id="event-form" class="event-form">
+            <input type="hidden" id="edit-index" value="-1" />
+            <label>
+              Title
+              <input type="text" id="event-title" required placeholder="e.g. Creative Workshops" />
+            </label>
+            <div class="form-row">
+              <label>
+                Date
+                <input type="text" id="event-date" required placeholder="e.g. 15 Mar 2026" />
+              </label>
+              <label>
+                Time
+                <input type="text" id="event-time" placeholder="e.g. 3:00 PM" />
+              </label>
+            </div>
+            <label>
+              Description
+              <textarea id="event-desc" required placeholder="Describe the event..."></textarea>
+            </label>
+            <div class="form-row">
+              <label>
+                Type
+                <select id="event-type">
+                  <option value="workshop">Workshop</option>
+                  <option value="coverage">Coverage</option>
+                  <option value="showcase">Showcase</option>
+                  <option value="default">Other</option>
+                </select>
+              </label>
+              <label>
+                Link (optional)
+                <input type="url" id="event-link" placeholder="https://..." />
+              </label>
+            </div>
+            <div class="btn-group">
+              <button type="submit" class="btn btn-primary" id="form-submit-btn"><i class="fa-solid fa-plus"></i> Add Event</button>
+              <button type="button" class="btn btn-secondary" id="form-cancel-btn" hidden><i class="fa-solid fa-xmark"></i> Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- RIGHT: Event list -->
+      <div class="panel">
+        <p class="panel-title"><i class="fa-regular fa-list"></i> Current Events <span id="event-count-badge" style="color:var(--muted);font-weight:400;"></span></p>
+        <div class="panel-body">
+          <div id="event-list" class="event-list">
+            <p style="color:var(--muted);font-size:0.85rem;">No events yet.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JSON Output -->
+    <div class="github-section" style="margin-top:1.5rem;">
+      <h3><i class="fa-regular fa-file-code"></i> Raw JSON Output</h3>
+      <p style="color:var(--muted);font-size:0.85rem;margin:0 0 0.75rem;">Copy this and replace <code>events.json</code> in your repo to update the site.</p>
+      <textarea id="json-output" class="json-output" readonly></textarea>
+      <button class="btn btn-primary btn-sm" id="copy-btn" style="margin-top:0.5rem;"><i class="fa-regular fa-copy"></i> Copy to Clipboard</button>
+      <span id="copy-msg" class="copy-msg hidden">Copied!</span>
+    </div>
+
+    <!-- GitHub Push -->
+    <div class="github-section">
+      <h3><i class="fa-brands fa-github"></i> Push to GitHub (Optional)</h3>
+      <p style="color:var(--muted);font-size:0.85rem;margin:0 0 0.75rem;">Commit changes directly to your repo. Requires a <a href="https://github.com/settings/tokens" target="_blank" rel="noopener" style="color:var(--accent-2);">fine-grained token</a> with contents write access.</p>
+      <input type="text" id="gh-token" placeholder="GitHub Personal Access Token" />
+      <input type="text" id="gh-repo" placeholder="owner/repo (e.g. username/repo)" value="charltonargos/Borrowdale-Academy-Media-Club" />
+      <input type="text" id="gh-branch" placeholder="Branch" value="main" />
+      <input type="text" id="gh-email" placeholder="Your GitHub email" />
+      <input type="text" id="gh-name" placeholder="Your GitHub username" />
+      <button class="btn btn-primary" id="gh-push-btn"><i class="fa-brands fa-github"></i> Commit & Push events.json</button>
+      <span id="gh-status" style="display:block;margin-top:0.5rem;font-size:0.85rem;font-weight:600;color:var(--muted);"></span>
+    </div>
+  </div>
+
+  <script>
+    let events = [];
+
+    const els = {
+      status: document.getElementById('status-bar'),
+      form: document.getElementById('event-form'),
+      editIndex: document.getElementById('edit-index'),
+      title: document.getElementById('event-title'),
+      date: document.getElementById('event-date'),
+      time: document.getElementById('event-time'),
+      desc: document.getElementById('event-desc'),
+      type: document.getElementById('event-type'),
+      link: document.getElementById('event-link'),
+      submitBtn: document.getElementById('form-submit-btn'),
+      cancelBtn: document.getElementById('form-cancel-btn'),
+      list: document.getElementById('event-list'),
+      countBadge: document.getElementById('event-count-badge'),
+      jsonOutput: document.getElementById('json-output'),
+      copyBtn: document.getElementById('copy-btn'),
+      copyMsg: document.getElementById('copy-msg'),
+      ghToken: document.getElementById('gh-token'),
+      ghRepo: document.getElementById('gh-repo'),
+      ghBranch: document.getElementById('gh-branch'),
+      ghEmail: document.getElementById('gh-email'),
+      ghName: document.getElementById('gh-name'),
+      ghPushBtn: document.getElementById('gh-push-btn'),
+      ghStatus: document.getElementById('gh-status'),
+    };
+
+    function setStatus(msg, type) {
+      els.status.textContent = msg;
+      els.status.className = 'status-bar ' + (type || '') + (msg ? '' : ' hidden');
+    }
+
+    function render() {
+      if (events.length === 0) {
+        els.list.innerHTML = '<p style="color:var(--muted);font-size:0.85rem;">No events yet. Add one on the left.</p>';
+      } else {
+        els.list.innerHTML = events.map((e, i) => `
+          <div class="event-item">
+            <div class="event-item-header">
+              <div>
+                <h4>${esc(e.title)}</h4>
+                <span class="type-tag">${esc(e.type || 'default')}</span>
+              </div>
+              <div class="event-item-actions">
+                <button class="btn btn-secondary btn-sm" onclick="editEvent(${i})"><i class="fa-regular fa-pen-to-square"></i></button>
+                <button class="btn btn-danger btn-sm" onclick="deleteEvent(${i})"><i class="fa-regular fa-trash-can"></i></button>
+              </div>
+            </div>
+            <p>${esc(e.date)}${e.time ? ' · ' + esc(e.time) : ''} — ${esc(e.description)}</p>
+          </div>
+        `).join('');
+      }
+      els.countBadge.textContent = `(${events.length})`;
+      updateJSON();
+    }
+
+    function esc(s) {
+      const d = document.createElement('div');
+      d.textContent = s || '';
+      return d.innerHTML;
+    }
+
+    function updateJSON() {
+      els.jsonOutput.value = JSON.stringify(events, null, 2);
+    }
+
+    function resetForm() {
+      els.form.reset();
+      els.editIndex.value = '-1';
+      els.submitBtn.innerHTML = '<i class="fa-solid fa-plus"></i> Add Event';
+      els.cancelBtn.hidden = true;
+    }
+
+    els.form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const idx = parseInt(els.editIndex.value);
+      const event = {
+        title: els.title.value.trim(),
+        date: els.date.value.trim(),
+        time: els.time.value.trim() || null,
+        description: els.desc.value.trim(),
+        type: els.type.value,
+        link: els.link.value.trim() || null,
+      };
+
+      if (idx >= 0 && idx < events.length) {
+        events[idx] = event;
+        setStatus('Event updated.', 'success');
+      } else {
+        events.push(event);
+        setStatus('Event added.', 'success');
+      }
+      resetForm();
+      render();
+    });
+
+    els.cancelBtn.addEventListener('click', resetForm);
+
+    window.editEvent = function(i) {
+      const e = events[i];
+      els.editIndex.value = String(i);
+      els.title.value = e.title || '';
+      els.date.value = e.date || '';
+      els.time.value = e.time || '';
+      els.desc.value = e.description || '';
+      els.type.value = e.type || 'default';
+      els.link.value = e.link || '';
+      els.submitBtn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Save Changes';
+      els.cancelBtn.hidden = false;
+      els.form.scrollIntoView({ behavior: 'smooth' });
+    };
+
+    window.deleteEvent = function(i) {
+      if (!confirm('Delete this event?')) return;
+      events.splice(i, 1);
+      setStatus('Event deleted.', 'success');
+      render();
+    };
+
+    els.copyBtn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(els.jsonOutput.value);
+        els.copyMsg.classList.remove('hidden');
+        setTimeout(() => els.copyMsg.classList.add('hidden'), 2000);
+      } catch {
+        els.jsonOutput.select();
+        document.execCommand('copy');
+        els.copyMsg.classList.remove('hidden');
+        setTimeout(() => els.copyMsg.classList.add('hidden'), 2000);
+      }
+    });
+
+    // GitHub push
+    els.ghPushBtn.addEventListener('click', async () => {
+      const token = els.ghToken.value.trim();
+      const repo = els.ghRepo.value.trim();
+      const branch = els.ghBranch.value.trim();
+      const email = els.ghEmail.value.trim();
+      const name = els.ghName.value.trim();
+
+      if (!token || !repo || !email || !name) {
+        els.ghStatus.textContent = 'Please fill in all GitHub fields.';
+        els.ghStatus.style.color = 'var(--red)';
+        return;
+      }
+
+      els.ghPushBtn.disabled = true;
+      els.ghStatus.textContent = 'Fetching current file...';
+      els.ghStatus.style.color = 'var(--muted)';
+
+      const content = btoa(unescape(encodeURIComponent(els.jsonOutput.value)));
+      const path = 'events.json';
+      const api = `https://api.github.com/repos/${repo}/contents/${path}`;
+
+      try {
+        // Get current file SHA
+        const getRes = await fetch(`${api}?ref=${branch}`, {
+          headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github.v3+json' },
+        });
+
+        let sha = null;
+        if (getRes.ok) {
+          const data = await getRes.json();
+          sha = data.sha;
+        } else if (getRes.status !== 404) {
+          const err = await getRes.json();
+          throw new Error(err.message || 'Failed to fetch current file');
+        }
+
+        els.ghStatus.textContent = 'Committing...';
+        const body = {
+          message: 'Update events.json via admin panel',
+          content,
+          branch,
+          ...(sha ? { sha } : {}),
+          committer: { name, email },
+        };
+
+        const putRes = await fetch(api, {
+          method: 'PUT',
+          headers: { Authorization: `token ${token}`, 'Content-Type': 'application/json', Accept: 'application/vnd.github.v3+json' },
+          body: JSON.stringify(body),
+        });
+
+        if (!putRes.ok) {
+          const err = await putRes.json();
+          throw new Error(err.message || 'Failed to commit');
+        }
+
+        const result = await putRes.json();
+        els.ghStatus.innerHTML = `Committed! <a href="${result.content.html_url}" target="_blank" rel="noopener" style="color:var(--accent-2);">View on GitHub</a>`;
+        els.ghStatus.style.color = 'var(--green)';
+        setStatus('Events pushed to GitHub!', 'success');
+      } catch (err) {
+        els.ghStatus.textContent = 'Error: ' + err.message;
+        els.ghStatus.style.color = 'var(--red)';
+      } finally {
+        els.ghPushBtn.disabled = false;
+      }
+    });
+
+    // Load local events.json as starting data
+    fetch('../data/events.json')
+      .then(r => { if (!r.ok) throw new Error(); return r.json(); })
+      .then(data => {
+        events = data;
+        render();
+        setStatus('Loaded events.json (' + events.length + ' events)', 'success');
+      })
+      .catch(() => {
+        events = [];
+        render();
+        setStatus('Could not load events.json — starting fresh.', 'error');
+      });
+  </script>
+</body>
+</html>

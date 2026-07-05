@@ -8,15 +8,15 @@
       name="description"
       content="Browse the complete photo gallery from the Borrowdale Academy Media Club — capturing school life, events, and creative moments year by year."
     />
-    <link rel="icon" type="image/png" href="Media Club Logo.png" />
+    <link rel="icon" type="image/png" href="images/Media Club Logo.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="gallery.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/gallery.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   </head>
   <body>
@@ -24,7 +24,7 @@
     <header class="site-header">
       <div class="container nav-wrap">
         <a class="brand" href="index.html">
-          <img src="Media Club Logo.png" alt="Borrowdale Academy Media Club logo" />
+          <img src="images/Media Club Logo.png" alt="Borrowdale Academy Media Club logo" />
           <span>
             <strong>Borrowdale Academy</strong>
             <small>Media Club</small>
@@ -40,6 +40,7 @@
           <a href="index.html#about">About</a>
           <a href="index.html#gallery">Gallery</a>
           <a href="magazines.html">Magazines</a>
+          <a href="events.html">Events</a>
           <a href="index.html#contact">Contact</a>
           <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">🌙 Dark mode</button>
         </nav>
@@ -128,8 +129,8 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="gallery-manifest.js"></script>
-    <script src="gallery.js"></script>
+    <script src="data/gallery-manifest.js"></script>
+    <script src="js/gallery.js"></script>
     <script>
       /* Theme toggle — shared logic */
       const themeToggle = document.getElementById('themeToggle');

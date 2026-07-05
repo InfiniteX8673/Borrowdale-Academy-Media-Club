@@ -26,6 +26,9 @@ body {
   color: var(--text);
   transition: background 0.25s ease, color 0.25s ease;
 }
+:root[data-theme='dark'] body {
+  background: linear-gradient(135deg, var(--bg), #0a1a26);
+}
 .topbar {
   display: flex;
   justify-content: flex-end;
