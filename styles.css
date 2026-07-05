@@ -349,6 +349,7 @@ input:focus, textarea:focus { outline: 2px solid rgba(255,207,16,0.3); border-co
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 0.5rem;
   padding: 0.7rem 0.95rem;
   border-radius: 999px;
   background: var(--surface);
