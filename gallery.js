@@ -3,7 +3,7 @@ const PAGE_SIZE = 24;
 let currentYear = null;
 let filteredPhotos = [];
 let displayedCount = 0;
-let isMasonry = false;
+let isMasonry = true;
 let lightboxIndex = -1;
 
 const els = {
@@ -152,6 +152,10 @@ function init() {
   currentYear = Number(years[0]);
   buildYearTabs();
   applyFilters();
+
+  els.grid.classList.add('masonry');
+  els.layoutIconGrid.style.display = 'none';
+  els.layoutIconMasonry.style.display = '';
 
   els.search.addEventListener('input', applyFilters);
 
