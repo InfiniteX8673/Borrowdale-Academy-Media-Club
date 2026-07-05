@@ -252,6 +252,15 @@ h1 {
   color: var(--muted);
   font-weight: 600;
 }
+.see-more-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.8rem;
+}
+.see-more-btn {
+  font-size: 1rem;
+  padding: 0.85rem 2rem;
+}
 .card-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Full Gallery — Borrowdale Academy Media Club</title>
+    <meta
+      name="description"
+      content="Browse the complete photo gallery from the Borrowdale Academy Media Club — capturing school life, events, and creative moments year by year."
+    />
+    <link rel="icon" type="image/png" href="Media Club Logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="gallery.css" />
+  </head>
+  <body>
+    <!-- ── HEADER ─────────────────────────────────────────────── -->
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a class="brand" href="index.html">
+          <img src="Media Club Logo.png" alt="Borrowdale Academy Media Club logo" />
+          <span>
+            <strong>Borrowdale Academy</strong>
+            <small>Media Club</small>
+          </span>
+        </a>
+        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <nav class="site-nav" aria-label="Primary">
+          <a href="index.html">Home</a>
+          <a href="index.html#about">About</a>
+          <a href="index.html#gallery">Gallery</a>
+          <a href="index.html#magazines">Magazines</a>
+          <a href="index.html#contact">Contact</a>
+          <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">🌙 Dark mode</button>
+        </nav>
+      </div>
+    </header>
+
+    <!-- ── PAGE HERO ──────────────────────────────────────────── -->
+    <section class="gallery-page-hero">
+      <div class="container">
+        <a href="index.html" class="back-link">← Back to home</a>
+        <p class="eyebrow">Full archive</p>
+        <h1>The Media Club Gallery</h1>
+        <p class="gallery-hero-sub">
+          Every frame tells a story — browse all our captured moments below.
+        </p>
+
+        <!-- Year tabs -->
+        <div class="year-tabs" id="year-tabs" role="tablist" aria-label="Select year"></div>
+
+        <!-- Stats bar -->
+        <div class="gallery-stats" id="gallery-stats">
+          <span id="photo-count">0 photos</span>
+          <span class="stats-dot">·</span>
+          <span id="year-label">Loading…</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── GALLERY GRID ───────────────────────────────────────── -->
+    <main class="container gallery-page-main">
+      <!-- Search / filter bar -->
+      <div class="gallery-controls">
+        <div class="search-wrap">
+          <svg aria-hidden="true" class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input id="gallery-search" type="search" placeholder="Search photos…" aria-label="Search photos" />
+        </div>
+        <button id="shuffle-btn" class="icon-btn" title="Shuffle order" aria-label="Shuffle photos">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg>
+        </button>
+        <button id="layout-btn" class="icon-btn" title="Toggle layout" aria-label="Toggle grid layout">
+          <svg id="layout-icon-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          <svg id="layout-icon-masonry" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><rect x="3" y="3" width="8" height="10"/><rect x="13" y="3" width="8" height="7"/><rect x="13" y="12" width="8" height="9"/><rect x="3" y="15" width="8" height="6"/></svg>
+        </button>
+      </div>
+
+      <!-- No results message -->
+      <p id="no-results" class="no-results" hidden>No photos found for that search.</p>
+
+      <!-- Photo grid -->
+      <div id="full-gallery-grid" class="full-gallery-grid" role="list"></div>
+
+      <!-- Load more -->
+      <div class="load-more-wrap" id="load-more-wrap" hidden>
+        <button id="load-more-btn" class="button secondary load-more-btn">
+          Load more photos
+          <span id="remaining-count" class="remaining-badge"></span>
+        </button>
+      </div>
+    </main>
+
+    <!-- ── LIGHTBOX ──────────────────────────────────────────── -->
+    <div id="gallery-lightbox" class="gallery-lightbox" aria-hidden="true" role="dialog" aria-label="Photo preview">
+      <button class="lb-close" id="lb-close" aria-label="Close preview">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <button class="lb-nav lb-prev" id="lb-prev" aria-label="Previous photo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="lb-content">
+        <img id="lb-image" src="" alt="Gallery photo" />
+        <div class="lb-caption">
+          <span id="lb-counter"></span>
+        </div>
+      </div>
+      <button class="lb-nav lb-next" id="lb-next" aria-label="Next photo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+      <div class="lb-backdrop" id="lb-backdrop"></div>
+    </div>
+
+    <!-- ── FOOTER ──────────────────────────────────────────────── -->
+    <footer class="gallery-footer">
+      <div class="container">
+        <p>© 2025 Borrowdale Academy Media Club · <a href="index.html">Return to home</a></p>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="gallery-manifest.js"></script>
+    <script src="gallery.js"></script>
+    <script>
+      /* Theme toggle — shared logic */
+      const themeToggle = document.getElementById('themeToggle');
+      const root = document.documentElement;
+      const applyTheme = (theme) => {
+        const isDark = theme === 'dark';
+        root.setAttribute('data-theme', isDark ? 'dark' : 'light');
+        themeToggle.textContent = isDark ? '☀️ Light mode' : '🌙 Dark mode';
+      };
+      applyTheme(localStorage.getItem('media-club-theme') || 'light');
+      themeToggle.addEventListener('click', () => {
+        const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('media-club-theme', next);
+        applyTheme(next);
+      });
+
+      /* Mobile nav */
+      const navToggle = document.querySelector('.nav-toggle');
+      const siteNav = document.querySelector('.site-nav');
+      navToggle?.addEventListener('click', () => {
+        const isOpen = siteNav.classList.toggle('open');
+        navToggle.setAttribute('aria-expanded', String(isOpen));
+      });
+    </script>
+  </body>
+</html>
