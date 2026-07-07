@@ -8,7 +8,18 @@
       name="description"
       content="The Borrowdale Academy Media Club showcases creativity through photography, video, design, and storytelling."
     />
+    <meta property="og:title" content="Borrowdale Academy Media Club" />
+    <meta property="og:description" content="Student-led creativity through photography, video, design, and storytelling." />
+    <meta property="og:image" content="https://borrowdaleacademymedia.club/images/Media%20Club%20Logo.png" />
+    <meta property="og:url" content="https://borrowdaleacademymedia.club" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Borrowdale Academy Media Club" />
+    <meta name="twitter:description" content="Student-led creativity through photography, video, design, and storytelling." />
+    <meta name="twitter:image" content="https://borrowdaleacademymedia.club/images/Media%20Club%20Logo.png" />
     <link rel="icon" type="image/png" href="images/Media Club Logo.png" />
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#ffcf10" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -194,6 +205,16 @@
       </section>
     </main>
 
+    <footer class="events-footer" style="border:none;padding:2rem 0 1rem;">
+      <div class="container">
+        <p>© <span class="year"></span> Borrowdale Academy Media Club</p>
+      </div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop" aria-label="Back to top" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+    </button>
+
     <div id="lightbox" class="lightbox" aria-hidden="true">
       <button class="lightbox-close" aria-label="Close preview">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="width:20px;height:20px"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
@@ -201,6 +222,7 @@
       <img id="lightbox-image" src="" alt="Featured club photo" />
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script src="data/gallery-manifest.js"></script>
     <script src="js/script.js"></script>
     <script>
@@ -221,6 +243,16 @@
         localStorage.setItem('media-club-theme', nextTheme);
         applyTheme(nextTheme);
       });
+
+      document.querySelectorAll('.year').forEach(el => { el.textContent = new Date().getFullYear(); });
+      const backBtn = document.getElementById('backToTop');
+      if (backBtn) {
+        window.addEventListener('scroll', () => backBtn.classList.toggle('visible', window.scrollY > 400), { passive: true });
+        backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+      }
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js').catch(() => {});
+      }
     </script>
   </body>
 </html>

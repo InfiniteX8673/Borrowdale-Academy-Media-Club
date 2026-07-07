@@ -8,7 +8,18 @@
       name="description"
       content="Browse the complete photo gallery from the Borrowdale Academy Media Club — capturing school life, events, and creative moments year by year."
     />
+    <meta property="og:title" content="Full Gallery — Borrowdale Academy Media Club" />
+    <meta property="og:description" content="Browse the complete photo gallery — capturing school life, events, and creative moments." />
+    <meta property="og:image" content="https://borrowdaleacademymedia.club/images/Media%20Club%20Logo.png" />
+    <meta property="og:url" content="https://borrowdaleacademymedia.club/gallery.html" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Full Gallery — Borrowdale Academy Media Club" />
+    <meta name="twitter:description" content="Browse the complete photo gallery — capturing school life, events, and creative moments." />
+    <meta name="twitter:image" content="https://borrowdaleacademymedia.club/images/Media%20Club%20Logo.png" />
     <link rel="icon" type="image/png" href="images/Media Club Logo.png" />
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#ffcf10" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -121,10 +132,15 @@
       <div class="lb-backdrop" id="lb-backdrop"></div>
     </div>
 
+    <!-- ── BACK TO TOP ────────────────────────────────────────── -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+    </button>
+
     <!-- ── FOOTER ──────────────────────────────────────────────── -->
     <footer class="gallery-footer">
       <div class="container">
-        <p>© 2025 Borrowdale Academy Media Club · <a href="index.html">Return to home</a></p>
+        <p>© <span class="year"></span> Borrowdale Academy Media Club · <a href="index.html">Return to home</a></p>
       </div>
     </footer>
 
@@ -154,6 +170,15 @@
         const isOpen = siteNav.classList.toggle('open');
         navToggle.setAttribute('aria-expanded', String(isOpen));
       });
+      document.querySelectorAll('.year').forEach(el => { el.textContent = new Date().getFullYear(); });
+      const backBtn = document.getElementById('backToTop');
+      if (backBtn) {
+        window.addEventListener('scroll', () => backBtn.classList.toggle('visible', window.scrollY > 400), { passive: true });
+        backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+      }
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js').catch(() => {});
+      }
     </script>
   </body>
 </html>

@@ -71,7 +71,10 @@ function applyFilters() {
   const query = els.search.value.toLowerCase().trim();
   let pool = currentYear ? allPhotos().filter((p) => p.year === currentYear) : allPhotos();
   if (query) {
-    pool = pool.filter((p) => p.src.toLowerCase().includes(query));
+    pool = pool.filter((p) => {
+      const fileName = p.src.split('/').pop().toLowerCase();
+      return String(p.year).includes(query) || fileName.includes(query);
+    });
   }
   filteredPhotos = pool;
   displayedCount = 0;
@@ -93,7 +96,8 @@ function loadMore() {
     item.className = 'gallery-item';
     item.role = 'listitem';
     item.dataset.src = photo.src;
-    item.innerHTML = `<img src="${photo.src}" alt="" loading="lazy" /><div class="gallery-item-overlay"><span>${photo.year}</span></div>`;
+    const fileName = photo.src.split('/').pop().replace(/\.(jpg|jpeg|png|gif|webp|avif)$/i, '');
+    item.innerHTML = `<img src="${photo.src}" alt="Media Club photo ${fileName}" loading="lazy" /><div class="gallery-item-overlay"><span>${photo.year}</span></div>`;
     item.addEventListener('click', () => openLightbox(filteredPhotos.indexOf(photo)));
     els.grid.appendChild(item);
   }
@@ -126,8 +130,9 @@ function openLightbox(index) {
   lightboxIndex = index;
   const photo = filteredPhotos[lightboxIndex];
   els.lbImage.src = photo.src;
-  els.lbImage.alt = `Photo ${lightboxIndex + 1} of ${filteredPhotos.length}`;
-  els.lbCounter.textContent = `${lightboxIndex + 1} / ${filteredPhotos.length}`;
+  const fileName = photo.src.split('/').pop().replace(/\.(jpg|jpeg|png|gif|webp|avif)$/i, '');
+  els.lbImage.alt = `Media Club photo ${fileName}`;
+  els.lbCounter.textContent = `${lightboxIndex + 1} / ${filteredPhotos.length} · ${photo.year}`;
   els.lightbox.classList.add('open');
   els.lightbox.ariaHidden = 'false';
   document.body.style.overflow = 'hidden';

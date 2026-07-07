@@ -1,0 +1,16 @@
+{
+  "name": "Borrowdale Academy Media Club",
+  "short_name": "BAC Media Club",
+  "description": "Student-led creativity through photography, video, design, and storytelling.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f6f7fb",
+  "theme_color": "#ffcf10",
+  "icons": [
+    {
+      "src": "images/Media Club Logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

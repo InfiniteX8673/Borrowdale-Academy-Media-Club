@@ -1,0 +1,11 @@
+{
+  "name": "borrowdale-academy-media-club",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Borrowdale Academy Media Club website",
+  "scripts": {
+    "generate:gallery": "node scripts/generate-manifest.js",
+    "generate:magazines": "node scripts/generate-magazine-manifest.js",
+    "generate": "node scripts/generate-manifest.js && node scripts/generate-magazine-manifest.js"
+  }
+}
