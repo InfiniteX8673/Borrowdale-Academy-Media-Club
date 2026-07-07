@@ -1,8 +1,3 @@
-/**
- * script.js
- * Primary interaction script for the landing page (index.html).
- */
-
 document.addEventListener('DOMContentLoaded', () => {
   const gallery = document.getElementById('gallery-grid');
   const lightbox = document.getElementById('lightbox');
