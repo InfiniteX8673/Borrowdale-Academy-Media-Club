@@ -151,20 +151,7 @@
             <p class="eyebrow">Upcoming focus</p>
             <h2>What's coming up</h2>
           </div>
-          <div class="card-grid">
-            <article class="card">
-              <h3>Creative Workshops</h3>
-              <p>Hands-on sessions on photography basics, framing, and storytelling.</p>
-            </article>
-            <article class="card">
-              <h3>Event Coverage</h3>
-              <p>Supporting school celebrations, sports days, and student showcases.</p>
-            </article>
-            <article class="card">
-              <h3>Digital Showcase</h3>
-              <p>A growing collection of films, edits, and visual stories from club members.</p>
-            </article>
-          </div>
+          <div id="events-list-home" class="card-grid"></div>
           <div class="see-more-wrap">
             <a href="events.html" class="button secondary see-more-btn">See All Events →</a>
           </div>
@@ -250,6 +237,24 @@
         window.addEventListener('scroll', () => backBtn.classList.toggle('visible', window.scrollY > 400), { passive: true });
         backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
       }
+      fetch('data/events.json')
+        .then(r => r.json())
+        .then(events => {
+          const container = document.getElementById('events-list-home');
+          if (!container) return;
+          if (events.length === 0) {
+            container.innerHTML = '<p>No upcoming events right now.</p>';
+            return;
+          }
+          container.innerHTML = events.map((e, i) => `
+            <article class="card" style="animation-delay:${i * 0.06}s">
+              <h3>${e.title}</h3>
+              <p>${e.date}${e.time ? ' &middot; ' + e.time : ''}</p>
+              <p>${e.description}</p>
+            </article>
+          `).join('');
+        })
+        .catch(() => {});
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('sw.js').catch(() => {});
       }
