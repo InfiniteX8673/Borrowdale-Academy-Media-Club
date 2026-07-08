@@ -1,26 +1,10 @@
 [
   {
-    "title": "Creative Workshops",
-    "date": "Ongoing",
-    "time": "Weekly sessions",
-    "description": "Hands-on sessions on photography basics, framing, and storytelling.",
-    "type": "workshop",
-    "link": null
-  },
-  {
-    "title": "Event Coverage",
-    "date": "Various dates",
-    "time": "School events",
-    "description": "Supporting school celebrations, sports days, and student showcases.",
-    "type": "coverage",
-    "link": null
-  },
-  {
-    "title": "Digital Showcase",
-    "date": "Coming soon",
-    "time": "TBD",
-    "description": "A growing collection of films, edits, and visual stories from club members.",
-    "type": "showcase",
+    "title": "Prefects Training Camp",
+    "date": "10 July 2026",
+    "time": "8:00 - 15:00",
+    "description": "Prefects are going to be going to their training camp and recieve training",
+    "type": "default",
     "link": null
   }
 ]
