@@ -49,7 +49,7 @@
         </section>
 
         <section class="photo-card">
-          <img src="../../Gallaries/2025/IMG-20251023-WA0081.jpg" alt="Media club photo preview" />
+          <img src="../../Galleries/2025/IMG-20251023-WA0081.jpg" alt="Media club photo preview" />
         </section>
 
         <section class="story-card">
@@ -63,24 +63,6 @@
         </section>
       </main>
     </div>
-    <script>
-      const themeToggle = document.getElementById('themeToggle');
-      const root = document.documentElement;
-      const storedTheme = localStorage.getItem('media-club-theme');
-
-      const applyTheme = (theme) => {
-        const isDark = theme === 'dark';
-        root.setAttribute('data-theme', isDark ? 'dark' : 'light');
-        themeToggle.textContent = isDark ? '☀️ Light mode' : '🌙 Dark mode';
-      };
-
-      applyTheme(storedTheme || 'light');
-
-      themeToggle.addEventListener('click', () => {
-        const nextTheme = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-        localStorage.setItem('media-club-theme', nextTheme);
-        applyTheme(nextTheme);
-      });
-    </script>
+    <script src="../../js/common.js"></script>
   </body>
 </html>

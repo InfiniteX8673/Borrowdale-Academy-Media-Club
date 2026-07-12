@@ -2,8 +2,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const gallery = document.getElementById('gallery-grid');
   const lightbox = document.getElementById('lightbox');
   const lightboxImage = document.getElementById('lightbox-image');
-  const navToggle = document.querySelector('.nav-toggle');
-  const siteNav = document.querySelector('.site-nav');
   const form = document.getElementById('contact-form');
   const status = document.getElementById('form-status');
 
@@ -67,22 +65,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (event.key === 'Escape' && lightbox && lightbox.classList.contains('open')) {
       closeMainLightbox();
     }
-  });
-
-  // ── MOBILE RESPONSIVE NAVIGATION ──
-  navToggle?.addEventListener('click', () => {
-    const isOpen = siteNav.classList.toggle('open');
-    navToggle.setAttribute('aria-expanded', String(isOpen));
-  });
-
-  // Close responsive mobile navigation overlay if user clicks a link anchor
-  document.querySelectorAll('.site-nav a').forEach(link => {
-    link.addEventListener('click', () => {
-      if (siteNav?.classList.contains('open')) {
-        siteNav.classList.remove('open');
-        navToggle?.setAttribute('aria-expanded', 'false');
-      }
-    });
   });
 
   // ── CONTACT FORM HANDLING (EmailJS) ──

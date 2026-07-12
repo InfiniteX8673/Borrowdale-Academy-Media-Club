@@ -90,6 +90,10 @@ function applyFilters() {
 }
 
 function loadMore() {
+  if (displayedCount >= filteredPhotos.length) {
+    els.loadMoreWrap.hidden = true;
+    return;
+  }
   const batch = filteredPhotos.slice(displayedCount, displayedCount + PAGE_SIZE);
   for (const photo of batch) {
     const item = document.createElement('div');

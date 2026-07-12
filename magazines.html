@@ -18,6 +18,7 @@
     <meta name="twitter:description" content="Browse all issues of the Borrowdale Academy Media Club Magazine." />
     <meta name="twitter:image" content="https://borrowdaleacademymedia.club/images/Media%20Club%20Logo.png" />
     <link rel="icon" type="image/png" href="images/Media Club Logo.png" />
+    <link rel="apple-touch-icon" href="images/Media Club Logo.png" />
     <link rel="manifest" href="manifest.json" />
     <meta name="theme-color" content="#ffcf10" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -48,6 +49,7 @@
         <nav class="site-nav" aria-label="Primary">
           <a href="index.html">Home</a>
           <a href="index.html#about">About</a>
+          <a href="gallery.html">Gallery</a>
           <a href="magazines.html">Magazines</a>
           <a href="events.html">Events</a>
           <a href="index.html#contact">Contact</a>
@@ -98,37 +100,9 @@
       </div>
     </div>
 
+    <noscript><style>.magazines-grid{display:none}</style><p style="text-align:center;padding:2rem;color:#5f6f7d">JavaScript is required to browse magazines.</p></noscript>
     <script src="data/magazine-manifest.js"></script>
+    <script src="js/common.js"></script>
     <script src="js/magazines.js"></script>
-    <script>
-      const themeToggle = document.getElementById('themeToggle');
-      const root = document.documentElement;
-      const applyTheme = (theme) => {
-        const isDark = theme === 'dark';
-        root.setAttribute('data-theme', isDark ? 'dark' : 'light');
-        themeToggle.textContent = isDark ? '☀️ Light mode' : '🌙 Dark mode';
-      };
-      applyTheme(localStorage.getItem('media-club-theme') || 'light');
-      themeToggle.addEventListener('click', () => {
-        const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-        localStorage.setItem('media-club-theme', next);
-        applyTheme(next);
-      });
-      const navToggle = document.querySelector('.nav-toggle');
-      const siteNav = document.querySelector('.site-nav');
-      navToggle?.addEventListener('click', () => {
-        const isOpen = siteNav.classList.toggle('open');
-        navToggle.setAttribute('aria-expanded', String(isOpen));
-      });
-      document.querySelectorAll('.year').forEach(el => { el.textContent = new Date().getFullYear(); });
-      const backBtn = document.getElementById('backToTop');
-      if (backBtn) {
-        window.addEventListener('scroll', () => backBtn.classList.toggle('visible', window.scrollY > 400), { passive: true });
-        backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-      }
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('sw.js').catch(() => {});
-      }
-    </script>
   </body>
 </html>

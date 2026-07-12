@@ -1,23 +1,24 @@
-const CACHE = 'bac-media-club-v1';
+const CACHE = 'bac-media-club-v2';
 const URLS = [
-  '/',
-  '/index.html',
-  '/gallery.html',
-  '/events.html',
-  '/magazines.html',
-  '/css/styles.css',
-  '/css/gallery.css',
-  '/css/events.css',
-  '/css/magazines.css',
-  '/js/script.js',
-  '/js/gallery.js',
-  '/js/events.js',
-  '/js/magazines.js',
-  '/data/gallery-manifest.js',
-  '/data/magazine-manifest.js',
-  '/data/events.json',
-  '/manifest.json',
-  '/images/Media Club Logo.png',
+  './',
+  './index.html',
+  './gallery.html',
+  './events.html',
+  './magazines.html',
+  './css/styles.css',
+  './css/gallery.css',
+  './css/events.css',
+  './css/magazines.css',
+  './js/common.js',
+  './js/script.js',
+  './js/gallery.js',
+  './js/events.js',
+  './js/magazines.js',
+  './data/gallery-manifest.js',
+  './data/magazine-manifest.js',
+  './data/events.json',
+  './manifest.json',
+  './images/Media Club Logo.png',
 ];
 
 self.addEventListener('install', (e) => {
@@ -33,6 +34,7 @@ self.addEventListener('activate', (e) => {
       Promise.all(keys.filter((k) => k !== CACHE).map((k) => caches.delete(k)))
     )
   );
+  self.clients.claim();
 });
 
 self.addEventListener('fetch', (e) => {

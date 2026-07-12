@@ -18,6 +18,7 @@
     <meta name="twitter:description" content="Student-led creativity through photography, video, design, and storytelling." />
     <meta name="twitter:image" content="https://borrowdaleacademymedia.club/images/Media%20Club%20Logo.png" />
     <link rel="icon" type="image/png" href="images/Media Club Logo.png" />
+    <link rel="apple-touch-icon" href="images/Media Club Logo.png" />
     <link rel="manifest" href="manifest.json" />
     <meta name="theme-color" content="#ffcf10" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -209,34 +210,12 @@
       <img id="lightbox-image" src="" alt="Featured club photo" />
     </div>
 
+    <noscript><style>.gallery-grid,.events-list-home{display:none}</style><p style="text-align:center;padding:2rem;color:#5f6f7d">JavaScript is required for the gallery and events on this page.</p></noscript>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script src="data/gallery-manifest.js"></script>
+    <script src="js/common.js"></script>
     <script src="js/script.js"></script>
     <script>
-      const themeToggle = document.getElementById('themeToggle');
-      const root = document.documentElement;
-      const storedTheme = localStorage.getItem('media-club-theme');
-
-      const applyTheme = (theme) => {
-        const isDark = theme === 'dark';
-        root.setAttribute('data-theme', isDark ? 'dark' : 'light');
-        themeToggle.textContent = isDark ? '☀️ Light mode' : '🌙 Dark mode';
-      };
-
-      applyTheme(storedTheme || 'light');
-
-      themeToggle.addEventListener('click', () => {
-        const nextTheme = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-        localStorage.setItem('media-club-theme', nextTheme);
-        applyTheme(nextTheme);
-      });
-
-      document.querySelectorAll('.year').forEach(el => { el.textContent = new Date().getFullYear(); });
-      const backBtn = document.getElementById('backToTop');
-      if (backBtn) {
-        window.addEventListener('scroll', () => backBtn.classList.toggle('visible', window.scrollY > 400), { passive: true });
-        backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-      }
       fetch('data/events.json')
         .then(r => r.json())
         .then(events => {
@@ -255,9 +234,6 @@
           `).join('');
         })
         .catch(() => {});
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('sw.js').catch(() => {});
-      }
     </script>
   </body>
 </html>

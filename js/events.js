@@ -1,5 +1,5 @@
 const EVENTS_REMOTE_URL =
-  'https://raw.githubusercontent.com/InfiniteX8673/Borrowdale-Academy-Media-Club/main/events.json';
+  'https://raw.githubusercontent.com/charltonargos/Borrowdale-Academy-Media-Club/main/data/events.json';
 
 const iconMap = {
   workshop: '<i class="fa-solid fa-paintbrush"></i>',
