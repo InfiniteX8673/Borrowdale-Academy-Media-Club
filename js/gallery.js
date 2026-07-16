@@ -43,7 +43,8 @@ function allPhotos() {
 function buildYearTabs() {
   const years = Object.keys(GALLERY_MANIFEST).sort((a, b) => b - a);
   if (years.length === 0) return;
-  els.yearTabs.innerHTML = years
+  const allBtn = `<button class="year-tab" role="tab" data-year="all" aria-selected="${currentYear === null}">All</button>`;
+  els.yearTabs.innerHTML = allBtn + years
     .map(
       (y) =>
         `<button class="year-tab" role="tab" data-year="${y}" aria-selected="${y === String(currentYear)}">${y}</button>`
@@ -53,17 +54,25 @@ function buildYearTabs() {
     const tab = e.target.closest('.year-tab');
     if (!tab) return;
     const year = tab.dataset.year;
-    if (year === String(currentYear)) return;
-    setYear(Number(year));
+    if (year === 'all') {
+      setYear(null);
+    } else {
+      if (Number(year) === currentYear) return;
+      setYear(Number(year));
+    }
   });
 }
 
 function setYear(year) {
   currentYear = year;
   document.querySelectorAll('.year-tab').forEach((tab) => {
-    tab.ariaSelected = String(Number(tab.dataset.year) === year);
+    if (tab.dataset.year === 'all') {
+      tab.ariaSelected = String(year === null);
+    } else {
+      tab.ariaSelected = String(Number(tab.dataset.year) === year);
+    }
   });
-  els.yearLabel.textContent = year;
+  els.yearLabel.textContent = year === null ? 'All years' : year;
   applyFilters();
 }
 
@@ -158,7 +167,7 @@ function navigateLightbox(dir) {
 function init() {
   const years = Object.keys(GALLERY_MANIFEST).sort((a, b) => b - a);
   if (years.length === 0) return;
-  currentYear = Number(years[0]);
+  currentYear = null;
   buildYearTabs();
   applyFilters();
 

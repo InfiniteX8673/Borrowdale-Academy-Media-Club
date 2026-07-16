@@ -5,7 +5,8 @@
   "description": "Borrowdale Academy Media Club website",
   "scripts": {
     "generate:gallery": "node scripts/generate-manifest.js",
+    "generate:videos": "node scripts/generate-video-manifest.js",
     "generate:magazines": "node scripts/generate-magazine-manifest.js",
-    "generate": "node scripts/generate-manifest.js && node scripts/generate-magazine-manifest.js"
+    "generate": "node scripts/generate-manifest.js && node scripts/generate-video-manifest.js && node scripts/generate-magazine-manifest.js"
   }
 }

@@ -4,8 +4,8 @@
   "description": "Student-led creativity through photography, video, design, and storytelling.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#f6f7fb",
-  "theme_color": "#ffcf10",
+  "background_color": "#f0f4ff",
+  "theme_color": "#0ea5e9",
   "icons": [
     {
       "src": "images/Media Club Logo.png",

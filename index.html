@@ -20,7 +20,7 @@
     <link rel="icon" type="image/png" href="images/Media Club Logo.png" />
     <link rel="apple-touch-icon" href="images/Media Club Logo.png" />
     <link rel="manifest" href="manifest.json" />
-    <meta name="theme-color" content="#ffcf10" />
+    <meta name="theme-color" content="#0ea5e9" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -31,6 +31,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   </head>
   <body>
+    <a class="skip-link" href="#home">Skip to content</a>
     <header class="site-header">
       <div class="container nav-wrap">
         <a class="brand" href="#home">
@@ -49,6 +50,7 @@
           <a href="#home">Home</a>
           <a href="#about">About</a>
           <a href="#gallery">Gallery</a>
+          <a href="#videos">Videos</a>
           <a href="#magazines">Magazines</a>
           <a href="#events">Events</a>
           <a href="#contact">Contact</a>
@@ -119,6 +121,20 @@
         </div>
       </section>
 
+      <section id="videos" class="section">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">Watch</p>
+            <h2>Our latest videos</h2>
+          </div>
+          <div id="video-grid" class="video-grid"></div>
+          <p id="videos-empty" class="videos-empty" hidden>No videos yet — check back soon!</p>
+          <div class="see-more-wrap">
+            <a href="videos.html" class="button secondary see-more-btn">Watch All Videos →</a>
+          </div>
+        </div>
+      </section>
+
       <section id="magazines" class="section">
         <div class="container magazines-panel">
           <div>
@@ -184,7 +200,8 @@
             </label>
             <label>
               Message
-              <textarea name="message" rows="4" required></textarea>
+              <textarea name="message" rows="4" required minlength="10" maxlength="1000" id="msg-input"></textarea>
+              <span class="char-count"><span id="char-current">0</span>/1000</span>
             </label>
             <button class="button primary" type="submit">Send message</button>
             <p id="form-status" class="form-status" aria-live="polite"></p>
@@ -193,9 +210,34 @@
       </section>
     </main>
 
-    <footer class="events-footer" style="border:none;padding:2rem 0 1rem;">
-      <div class="container">
-        <p>© <span class="year"></span> Borrowdale Academy Media Club</p>
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="#home">
+            <img src="images/Media Club Logo.png" alt="Borrowdale Academy Media Club logo" />
+            <span>
+              <strong>Borrowdale Academy</strong>
+              <small>Media Club</small>
+            </span>
+          </a>
+          <p class="footer-tagline">Student-led creativity through photography, video, design, and storytelling.</p>
+        </div>
+        <div class="footer-nav">
+          <h4>Explore</h4>
+          <a href="#about">About</a>
+          <a href="#gallery">Gallery</a>
+          <a href="#videos">Videos</a>
+          <a href="magazines.html">Magazines</a>
+          <a href="events.html">Events</a>
+        </div>
+        <div class="footer-social">
+          <h4>Connect</h4>
+          <a href="https://www.youtube.com/channel/UCE8TmQjyA2OaeCJgGuAEDUQ" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-youtube"></i> YouTube</a>
+          <a href="https://www.tiktok.com/@borrowdaleacademy?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-tiktok"></i> TikTok</a>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <p>&copy; <span class="year"></span> Borrowdale Academy Media Club</p>
       </div>
     </footer>
 
@@ -203,19 +245,94 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
     </button>
 
-    <div id="lightbox" class="lightbox" aria-hidden="true">
+    <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-label="Photo preview">
       <button class="lightbox-close" aria-label="Close preview">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="width:20px;height:20px"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
-      <img id="lightbox-image" src="" alt="Featured club photo" />
+      <button class="lb-nav lb-prev" id="lb-prev-home" aria-label="Previous photo" style="visibility:hidden">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="lb-content">
+        <img id="lightbox-image" src="" alt="Featured club photo" />
+        <div class="lb-caption"><span id="lb-counter-home"></span></div>
+      </div>
+      <button class="lb-nav lb-next" id="lb-next-home" aria-label="Next photo" style="visibility:hidden">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
     </div>
 
-    <noscript><style>.gallery-grid,.events-list-home{display:none}</style><p style="text-align:center;padding:2rem;color:#5f6f7d">JavaScript is required for the gallery and events on this page.</p></noscript>
+    <div id="video-player" class="video-player" aria-hidden="true" role="dialog" aria-label="Video player">
+      <div class="video-player-backdrop" id="video-player-backdrop"></div>
+      <div class="video-player-header">
+        <h2 id="video-player-title"></h2>
+        <button class="video-player-close" id="video-player-close" aria-label="Close video">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="width:20px;height:20px"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="video-player-body">
+        <video id="video-player-el" class="video-player-native" preload="metadata" playsinline></video>
+        <iframe id="video-player-frame" class="video-player-iframe" title="Video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="display:none"></iframe>
+        <div class="vp-spinner" id="vp-spinner"></div>
+        <button class="vp-big-play" id="vp-big-play" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,3 20,12 6,21"/></svg>
+        </button>
+        <div id="video-controls" class="video-controls" style="display:none">
+          <div class="vc-progress-wrap" id="vc-progress-wrap">
+            <div class="vc-progress-bar"><div class="vc-progress-filled" id="vc-progress-filled"></div></div>
+            <div class="vc-progress-hover" id="vc-progress-hover"></div>
+            <div class="vc-progress-tooltip" id="vc-progress-tooltip"></div>
+          </div>
+          <div class="vc-row">
+            <button class="vc-btn" id="vc-play" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor" style="width:20px;height:20px"><polygon points="6,3 20,12 6,21"/></svg></button>
+            <button class="vc-btn vc-skip" id="vc-skip-back" aria-label="Skip back 10 seconds" title="Back 10s">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+              <span class="vc-skip-label">10s</span>
+            </button>
+            <button class="vc-btn vc-skip" id="vc-skip-fwd" aria-label="Skip forward 10 seconds" title="Forward 10s">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+              <span class="vc-skip-label">10s</span>
+            </button>
+            <span class="vc-time" id="vc-time">0:00 / 0:00</span>
+            <div class="vc-spacer"></div>
+            <button class="vc-btn" id="vc-speed" aria-label="Playback speed" title="Speed">1x</button>
+            <div class="vc-volume-wrap">
+              <button class="vc-btn" id="vc-mute" aria-label="Mute"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg></button>
+              <input type="range" id="vc-volume" class="vc-volume-slider" min="0" max="1" step="0.05" value="1" aria-label="Volume" />
+            </div>
+            <button class="vc-btn" id="vc-pip" aria-label="Picture-in-Picture" title="Picture-in-Picture" style="display:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px"><rect x="2" y="3" width="20" height="14" rx="2"/><rect x="11" y="9" width="9" height="7" rx="1" fill="currentColor" opacity="0.3"/></svg></button>
+            <button class="vc-btn" id="vc-fullscreen" aria-label="Fullscreen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="mini-player" class="mini-player" aria-hidden="true" role="dialog" aria-label="Mini video player">
+      <div class="mini-player-drag-handle" id="mini-player-drag"></div>
+      <div class="mini-player-content">
+        <video id="mini-player-el" class="mini-player-video" preload="metadata" playsinline></video>
+      </div>
+      <div class="mini-player-controls">
+        <button class="mini-ctrl" id="mini-play" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px"><polygon points="6,3 20,12 6,21"/></svg></button>
+        <span class="mini-title" id="mini-title"></span>
+        <div class="mini-ctrl-group">
+          <button class="mini-ctrl" id="mini-expand" aria-label="Expand" title="Return to full player"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></button>
+          <button class="mini-ctrl" id="mini-close" aria-label="Close" title="Stop playback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="width:16px;height:16px"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        </div>
+      </div>
+    </div>
+
+    <noscript><style>.gallery-grid,.events-list-home,.video-grid{display:none}</style><p style="text-align:center;padding:2rem;color:#5f6f7d">JavaScript is required for the gallery, videos, and events on this page.</p></noscript>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script src="data/gallery-manifest.js"></script>
+    <script src="data/video-manifest.js"></script>
     <script src="js/common.js"></script>
     <script src="js/script.js"></script>
     <script>
+      const homeIconMap = {
+        workshop: '<i class="fa-solid fa-paintbrush"></i>',
+        coverage: '<i class="fa-solid fa-camera"></i>',
+        showcase: '<i class="fa-solid fa-display"></i>',
+      };
       fetch('data/events.json')
         .then(r => r.json())
         .then(events => {
@@ -226,9 +343,13 @@
             return;
           }
           container.innerHTML = events.map((e, i) => `
-            <article class="card" style="animation-delay:${i * 0.06}s">
+            <article class="card event-home-card" style="animation-delay:${i * 0.06}s">
+              <div class="event-home-icon ${e.type || 'default'}">${homeIconMap[e.type] || '<i class="fa-solid fa-calendar"></i>'}</div>
               <h3>${e.title}</h3>
-              <p>${e.date}${e.time ? ' &middot; ' + e.time : ''}</p>
+              <div class="event-home-meta">
+                <span><i class="fa-regular fa-calendar"></i> ${e.date}</span>
+                ${e.time ? `<span><i class="fa-regular fa-clock"></i> ${e.time}</span>` : ''}
+              </div>
               <p>${e.description}</p>
             </article>
           `).join('');
