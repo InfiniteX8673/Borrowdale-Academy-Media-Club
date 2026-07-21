@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+#
+# Git pre-commit hook — auto-generates gallery and video manifests
+# whenever files in Galleries/ or Videos/ are staged.
+#
+# Install: cp scripts/pre-commit .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit
+# Or run: scripts/install-hook.sh
+#
+set -euo pipefail
+
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+cd "$REPO_ROOT"
+
+# Grab list of staged files
+STAGED=$(git diff --cached --name-only --diff-filter=ACDMR)
+
+NEED_GALLERY=0
+NEED_VIDEO=0
+
+for f in $STAGED; do
+  case "$f" in
+    Galleries/*) NEED_GALLERY=1 ;;
+    Videos/*)    NEED_VIDEO=1 ;;
+  esac
+done
+
+if [ "$NEED_GALLERY" -eq 1 ]; then
+  echo "📸 Staged files in Galleries/ — regenerating gallery manifest..."
+  bash scripts/generate-gallery-manifest.sh
+  git add data/gallery-manifest.js
+fi
+
+if [ "$NEED_VIDEO" -eq 1 ]; then
+  echo "🎬 Staged files in Videos/ — regenerating video manifest..."
+  bash scripts/generate-video-manifest.sh
+  git add data/video-manifest.js
+fi
